@@ -1,0 +1,3 @@
+== Welcome to EasyFlatFees
+
+This is a personal project to use MongoDB, Devise, OmniAuth, Bootstrap and to write some tests.
