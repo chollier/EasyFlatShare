@@ -45,7 +45,7 @@ class User
   validates_presence_of :username
   validates_uniqueness_of :username, :email, :case_sensitive => false
 
-
+  has_and_belongs_to_many :bills
 
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider, :token
 
