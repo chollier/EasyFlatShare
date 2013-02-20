@@ -4,4 +4,6 @@ class Expense
   field :details, type: String
   field :amount, type: BigDecimal
   field :date, type: Date
+
+  embedded_in :bill
 end
