@@ -20,7 +20,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "mongoid", ">= 3.0.3"
+gem "mongoid", ">= 3.1"
 gem "rspec-rails", ">= 2.11.0", :group => [:development, :test]
 gem "capybara", ">= 1.1.2", :group => :test
 gem "database_cleaner", ">= 0.8.0", :group => :test
@@ -38,6 +38,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 
 gem 'figaro'
+
+gem 'koala'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
