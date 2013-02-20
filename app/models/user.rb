@@ -37,11 +37,49 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  field :name
-  validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
+  field :username
+  field :uid
+  field :provider
+  field :token
 
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  validates_presence_of :username
+  validates_uniqueness_of :username, :email, :case_sensitive => false
 
+
+
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider, :token
+
+  def self.from_omniauth(auth)
+    where(auth.slice(:provider, :uid)).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.username = auth.info.nickname
+      user.email = auth.info.email
+      user.token = auth.credentials.token
+    end
+  end
+
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+        user.errors.delete(:password) if user.errors.has_key?(:password)
+      end
+    else
+      super
+    end
+
+    # super.tap do |user|
+    #   if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+    #     user.email = data.email if user.email.blank?
+    #     user.username = data.username
+    #     logger.debug "\n ### \n"
+    #     logger.debug session["devise.facebook_data"]
+    #     logger.debug "\n ### \n"
+    #   end
+    # end
+
+  end
 
 end
