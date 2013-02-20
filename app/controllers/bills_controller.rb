@@ -1,4 +1,6 @@
 class BillsController < ApplicationController
+    before_filter :authenticate_user!
+
   # GET /bills
   # GET /bills.json
   def index
@@ -40,7 +42,7 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.json
   def create
-    @bill = Bill.new(params[:bill])
+    @bill = current_user.bills.new(params[:bill])
 
     respond_to do |format|
       if @bill.save
