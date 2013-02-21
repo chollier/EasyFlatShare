@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+jQuery(document).ready(function() {
+	if ($('.datepicker').length > 0) {
+		$('.datepicker').datepicker().on('changeDate', function(ev) {
+            $(this).prev().attr('value', $(this).data('date'));
+            $(this).datepicker('hide');
+
+		});
+	}
+});

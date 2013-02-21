@@ -20,7 +20,17 @@
     			</tr>
     		</thead>
 
-    		<tbody></tbody>
+    		<tbody>
+          <% @bill.expenses[0..@bill.expenses.size-3].each do |expense| %>
+            <tr>
+              <td><%= expense.date.strftime("%m/%d/%Y") %></td>
+              <td><%= expense.name %></td>
+              <td><%= link_to(expense.creator.username, expense.creator) if expense.creator %></td>
+              <td><%= expense.amount %></td>
+              <td>lala</td>
+            </tr
+          <% end %> 
+        </tbody>
 
     	</table>
     	<% else %>
@@ -32,7 +42,19 @@
 
     </div>
     <div class="span3">
-      <!--Body content-->
+      <!-- Button to trigger modal -->
+      <p>
+        <a href="#addExpense" role="button" class="btn btn-primary btn-large" data-toggle="modal">Add Expense</a>
+      </p>
+       
+      <!-- Modal -->
+        <div id="addExpense" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addExpenseLabel" aria-hidden="true">
+
+          <%= render 'expenses/form' %>
+
+      </div>
+
+      <hr class="soften" />
       <h4>Users</h4>
       <p>There's no user for now (except you), you should invite your roomates.</p>
       <hr class="soften" />
