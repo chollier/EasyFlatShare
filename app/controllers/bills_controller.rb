@@ -4,7 +4,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    @bills = current_user.bills.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,6 +43,7 @@ class BillsController < ApplicationController
   # POST /bills.json
   def create
     @bill = current_user.bills.new(params[:bill])
+    @bill.creator = current_user
 
     respond_to do |format|
       if @bill.save

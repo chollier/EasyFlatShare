@@ -41,6 +41,8 @@ class User
   field :uid
   field :provider
   field :token
+  
+  has_one :creator, :class_name => "User", :foreign_key => "creator_id"
 
   validates_presence_of :username
   validates_uniqueness_of :username, :email, :case_sensitive => false
