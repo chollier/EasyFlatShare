@@ -16,6 +16,7 @@ class BillsController < ApplicationController
   # GET /bills/1.json
   def show
     @bill = Bill.find(params[:id])
+    @expense = @bill.expenses.new
 
     respond_to do |format|
       format.html # show.html.erb

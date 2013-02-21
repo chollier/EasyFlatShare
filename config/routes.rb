@@ -8,7 +8,9 @@ EasyFlatFees::Application.routes.draw do
 
 
   resources :users
-  resources :bills
+  resources :bills do
+    resources :expenses
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

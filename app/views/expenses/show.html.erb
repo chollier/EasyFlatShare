@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @expense.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_bill_expense_path(@bill, @expense) %> |
+<%= link_to 'Back', bill_path(@bill) %>
