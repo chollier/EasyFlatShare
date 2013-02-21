@@ -1,5 +1,20 @@
 <%= link_to "Home", root_path, :class => 'brand' %>
-<ul class="nav">
+<ul class="nav ">
+<% if user_signed_in? %>
+  <li class="dropdown<%= ' active' if controller_name == "bills" %>">
+    <%= link_to 'Bills  <b class="caret"></b>'.html_safe, bills_path, { :class => "dropdown-toggle",  "data-toggle" => "dropdown" } %>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="bills-dropdown">
+      <% current_user.bills.each do |bill| %>
+        <li><%= link_to bill.name, bill %></li>
+      <% end %>
+      <li class="divider"></li>
+      <li><%= link_to "Manage bills", bills_path %>
+    </ul>
+  </li>
+<% end %>
+</ul>
+
+<ul class="nav pull-right">
   <% if user_signed_in? %>
     <li>
     <%= link_to('Logout', destroy_user_session_path, :method=>'delete') %>
@@ -19,3 +34,4 @@
     </li>
   <% end %>
 </ul>
+
