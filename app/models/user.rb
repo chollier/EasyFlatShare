@@ -42,14 +42,12 @@ class User
   field :provider
   field :token
 
-  has_one :creator, :class_name => "User", :foreign_key => "creator_id"
-
   validates_presence_of :username
   validates_uniqueness_of :username, :email, :case_sensitive => false
 
-  has_and_belongs_to_many :bills
+  has_and_belongs_to_many :bills, :inverse_of => :users
 
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider, :token
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider, :token, :creator
 
   def fb_profile_pic
     @graph = Koala::Facebook::API.new(self.token)
