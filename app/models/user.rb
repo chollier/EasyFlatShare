@@ -41,7 +41,7 @@ class User
   field :uid
   field :provider
   field :token
-  
+
   has_one :creator, :class_name => "User", :foreign_key => "creator_id"
 
   validates_presence_of :username
@@ -50,6 +50,12 @@ class User
   has_and_belongs_to_many :bills
 
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :uid, :provider, :token
+
+  def fb_profile_pic
+    @graph = Koala::Facebook::API.new(self.token)
+    @profile_image = @graph.get_picture("me")
+  end
+
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
