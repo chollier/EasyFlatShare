@@ -34,6 +34,13 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
       quis nostrud exercitation ullamco laboris</p>
+      <hr class="soften" />
+      <h4>Infos</h4>
+      <p>
+      	<small>
+      		This bills was created by <%= link_to @bill.creator.username, @bill.creator %> on <%= @bill.created_at.strftime("%d/%m/%Y") %>.
+      	</small>
+      </p>
 
     </div>
   </div>
